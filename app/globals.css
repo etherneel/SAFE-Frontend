@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: #040404;
+  --background-btn-rgb: rgba(161, 103, 254, 0.09);
+
+  /* primary/brand color */
+  --primary: #8B2DC5
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+
+    --gray-dark: #363637;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+}
+
+.wallet-button {
+  border-color: #363637 !important;
+  background: rgba(161, 103, 254, 0.09) !important;
+}
+
+.heading-color {
+  background: linear-gradient(180deg, #7D43C8 0%, rgba(39, 200, 251, 0.92) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-section-bg:after {
+  content: '';
+  position: absolute;
+  border-radius: 850px;
+  background: linear-gradient(180deg, rgba(139, 45, 197, 0.25) 0%, rgba(155, 69, 209, 0.17) 100%);
+  filter: blur(300px);
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.input-border {
+  border-color: #363637;
+  background: rgba(61, 36, 102, 0.09);
+}
+
+/* Hide Arrows From Input Number */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.primary-bg {
+  background-color: var(--primary);
+}
+
+.primary-color {
+  color: var(--primary);
+}
+
+.vertical-border {
+  border-image-slice: 1;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-width: 2px;
+  border-image-source: linear-gradient(180deg, #8B2DC5 0%, rgba(26, 5, 39, 0.92) 100%);
+}
+
+.card {
+  background: linear-gradient(241deg, rgba(112, 24, 255, 0.20) 3.03%, rgba(48, 45, 54, 0.17) 67.92%);
+}
+
+.mobile-menu {
+  border-radius: 0px 25px 25px 0px;
+  background:  rgb(5 2 7);
+}
+
+.mobile-menu:after {
+  content: ' ';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgba(73, 73, 73, 0.09);
+  border-radius: 0px 25px 25px 0px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+}
