@@ -1,13 +1,23 @@
 "use client";
 
+import { safecontract, safe_abi } from "../safeabi";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Routes } from "../config/routes";
 import "react-datepicker/dist/react-datepicker.css";
 import { Formik, Form, Field } from "formik";
 import DatePicker from "react-datepicker";
+import { ethers } from "ethers";
 import validationSchema from "./validationSchema";
-import { ConnectWallet, metamaskWallet, walletConnect, trustWallet,  useContract, useAddress, ThirdwebProvider, } from "@thirdweb-dev/react";
+import {
+  ConnectWallet,
+  metamaskWallet,
+  walletConnect,
+  trustWallet,
+  useContract,
+  useAddress,
+  ThirdwebProvider,
+} from "@thirdweb-dev/react";
 import moment from "moment";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -57,7 +67,7 @@ const tabs = [
   {
     id: 3,
     title: "Review",
-  }
+  },
 ];
 
 export default function Safe() {
@@ -74,17 +84,15 @@ export default function Safe() {
   const isLastStep = activeStep === tabs.length - 1;
 
   const { contract } = useContract(
-    "0x59C4b1D7d10762Fa8F34866ece433ACD03784Af4"
+    "0x5EE0931374409Fc2060c34c408918e0bC6374ff7"
   );
   const MMaddress = useAddress();
-  
 
   async function _submitForm(values, actions) {
-     
     actions.setSubmitting(false);
   }
 
- console.log(safeformdata)
+  console.log(safeformdata);
 
   useEffect(() => {
     setSafefinaldata({
@@ -172,10 +180,18 @@ export default function Safe() {
       companylegalname,
     ];
     try {
-      const data = await contract.call("storeInvestmentDetails", [
-        ContractDetails,
-      ]);
-      //console.log("contarct data : ", data);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(safecontract, safe_abi, signer);
+      console.log(contract);
+      const token = await contract.CreateSafe(ContractDetails, {
+        value: ethers.utils.parseEther("0.0003"),
+      });
+      console.log(token);
+      const receipt = await token.wait();
+      console.log(receipt);
+      console.log(receipt.status);
+      if (receipt.status === 1) {
       const postData = await axios.post("http://localhost:3100/register", {
         name: money,
         name2: address,
@@ -193,9 +209,8 @@ export default function Safe() {
         name10: investorlegal,
         name11: MMaddress,
         name12: authorized,
-        emailOfInvestor:emailOfInvestor,
+        emailOfInvestor: emailOfInvestor,
         emailOfFounder: emailOfFounder,
-        
       });
       console.log("postData : ", postData);
       toast.success("SAFE Created Successfully !", {
@@ -203,6 +218,7 @@ export default function Safe() {
         autoClose: 2500,
       });
       setSafeDisable(false);
+    }
       //window.location.href = '/'
     } catch (error) {
       setLoading(false);
@@ -215,10 +231,11 @@ export default function Safe() {
     } finally {
       setLoading(false);
     }
+
   };
 
   // const SafeCreate = async (values) => {
-  //   setLoading(true); 
+  //   setLoading(true);
   //   let {
   //     money,
   //     address,
@@ -243,7 +260,7 @@ export default function Safe() {
   //   } = values;
   //      console.log("contarct data : ", values);
   //   try {
-   
+
   //     const postData = await axios.post("http://localhost:3100/register", {
   //       name: money,
   //       name2: address,
@@ -309,6 +326,39 @@ export default function Safe() {
   //     console.log(error);
   //   }
   // };
+
+  // const [buyToken]
+
+  //  const createSafe = async () => {
+  //   setBuyTokenLoading(true);
+
+  //          try {
+  //         const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //         const signer = provider.getSigner();
+  //         const contract = new ethers.Contract(
+  //          safecontract,
+  //          safe_abi,
+  //          signer,
+  //         );
+  //         console.log(contract);
+  //         const token = await contract.CreateSafe(ContractDetails, { value :ethers.utils.parseEther("0.0003") });
+  //         console.log(token);
+  //         const receipt = await token.wait();
+
+  //       console.log(receipt)
+  //        console.log(receipt.status)
+
+  //           if (receipt.status === 1) {
+
+  //           }
+
+  //           } catch (error) {
+  //             toast.error("Failed", {
+  //               position: toast.POSITION.TOP_CENTER,
+  //             });
+  //           }
+  //          setBuyTokenLoading(false);
+  //     };
 
   return (
     <>
@@ -509,7 +559,8 @@ export default function Safe() {
                                 id="emailOfFounder"
                                 className="input-border shadow-sm inline-flex w-full cursor-pointer items-center align-middle rounded-lg border border-1 px-[14px] md:px-[28px] py-[13px]"
                               />
-                              {errors.emailOfFounder && touched.emailOfFounder ? (
+                              {errors.emailOfFounder &&
+                              touched.emailOfFounder ? (
                                 <p className="text-red-500 text-xs mt-2">
                                   {errors.emailOfFounder}
                                 </p>
@@ -558,7 +609,7 @@ export default function Safe() {
                                         form.setFieldValue(field.name, date);
                                         setStartdate(date);
                                       }}
-                                      dateFormat="MMMM d,&nbsp; yyyy"
+                                      dateFormat="MMMM d &nbsp;, yyyy"
                                       name="investmentdate"
                                     />
                                   )}
@@ -1189,7 +1240,7 @@ export default function Safe() {
                               </div>
                               <div className="col-span-4">
                                 <p className="font-medium text-base">
-                                {safefinaldata?.authorized}
+                                  {safefinaldata?.authorized}
                                 </p>
                               </div>
                               <div className="col-span-8 col-start-6">
@@ -1309,7 +1360,7 @@ export default function Safe() {
                           )}
                           {activeStep === 3 && (
                             <>
-                            {loading ? (
+                              {loading ? (
                                 <>
                                   <button
                                     // type="submit"
@@ -1346,7 +1397,7 @@ export default function Safe() {
                                   </svg>
                                 </button>
                               )}
-                              </>
+                            </>
                           )}
                           {/* {activeStep === 4 && (
                             <>
@@ -1378,8 +1429,6 @@ export default function Safe() {
                               
                             </>
                           )} */}
-
-                         
                         </div>
                       </Form>
                     )}

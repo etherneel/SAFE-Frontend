@@ -57,7 +57,7 @@ export default function Home() {
           <h1 className="md:text-[75px] text-4xl font-extrabold	text-center mb-8 sm:leading-[50px] md:leading-[95px] md:mb-[28px]">
             Start your <span className="heading-color">SAFE</span> investment with us on polygon blockchain
           </h1>
-          <h4 className="text-sm md:text-2xl text-center mb-[38px] md:px-5 text-[#A9A9A9]">
+          <h4 className="text-sm md:text-2xl text-center mb-[38px] px-5 text-[#A9A9A9]">
             The first decentralised SAFE platform on polygon layer-2 network for
             your investments. Get your investments in a decentralized manner by
             signing transactions on polygon blockchain

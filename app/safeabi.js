@@ -1,0 +1,207 @@
+export const safecontract = "0x41d28eB85aDFC76852aC77846EA0Cc3f077bf9f5";
+export const safe_abi = [
+  {
+    inputs: [
+      { internalType: "address", name: "_feesAddress", type: "address" },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: "address", name: "user", type: "address" },
+    ],
+    name: "UserBlacklisted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: "address", name: "user", type: "address" },
+    ],
+    name: "UserWhitelisted",
+    type: "event",
+  },
+  {
+    inputs: [
+      {
+        components: [
+          {
+            internalType: "enum Safe.InvestmentType",
+            name: "investmentType",
+            type: "uint8",
+          },
+          {
+            internalType: "uint256",
+            name: "investmentAmount",
+            type: "uint256",
+          },
+          { internalType: "uint256", name: "investmentDate", type: "uint256" },
+          { internalType: "uint256", name: "valuationCap", type: "uint256" },
+          { internalType: "uint256", name: "discount", type: "uint256" },
+          { internalType: "bool", name: "proRataRights", type: "bool" },
+          { internalType: "bool", name: "mostFavoredNation", type: "bool" },
+          { internalType: "address", name: "investorAddress", type: "address" },
+          { internalType: "string", name: "name", type: "string" },
+        ],
+        internalType: "struct Safe.InvestmentDetails",
+        name: "details",
+        type: "tuple",
+      },
+    ],
+    name: "CreateSafe",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "Safefees",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "user", type: "address" }],
+    name: "blacklistAddress",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "", type: "address" },
+      { internalType: "uint256", name: "", type: "uint256" },
+    ],
+    name: "investorDetails",
+    outputs: [
+      {
+        internalType: "enum Safe.InvestmentType",
+        name: "investmentType",
+        type: "uint8",
+      },
+      { internalType: "uint256", name: "investmentAmount", type: "uint256" },
+      { internalType: "uint256", name: "investmentDate", type: "uint256" },
+      { internalType: "uint256", name: "valuationCap", type: "uint256" },
+      { internalType: "uint256", name: "discount", type: "uint256" },
+      { internalType: "bool", name: "proRataRights", type: "bool" },
+      { internalType: "bool", name: "mostFavoredNation", type: "bool" },
+      { internalType: "address", name: "investorAddress", type: "address" },
+      { internalType: "string", name: "name", type: "string" },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "", type: "address" },
+      { internalType: "uint256", name: "", type: "uint256" },
+    ],
+    name: "investorProposalApprovals",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "", type: "address" }],
+    name: "investorProposalCount",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "user", type: "address" },
+      { internalType: "uint256", name: "index", type: "uint256" },
+    ],
+    name: "readInvestmentDetails",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "enum Safe.InvestmentType",
+            name: "investmentType",
+            type: "uint8",
+          },
+          {
+            internalType: "uint256",
+            name: "investmentAmount",
+            type: "uint256",
+          },
+          { internalType: "uint256", name: "investmentDate", type: "uint256" },
+          { internalType: "uint256", name: "valuationCap", type: "uint256" },
+          { internalType: "uint256", name: "discount", type: "uint256" },
+          { internalType: "bool", name: "proRataRights", type: "bool" },
+          { internalType: "bool", name: "mostFavoredNation", type: "bool" },
+          { internalType: "address", name: "investorAddress", type: "address" },
+          { internalType: "string", name: "name", type: "string" },
+        ],
+        internalType: "struct Safe.InvestmentDetails",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "uint256", name: "index", type: "uint256" }],
+    name: "signProposal",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "", type: "address" },
+      { internalType: "uint256", name: "", type: "uint256" },
+    ],
+    name: "userDetails",
+    outputs: [
+      {
+        internalType: "enum Safe.InvestmentType",
+        name: "investmentType",
+        type: "uint8",
+      },
+      { internalType: "uint256", name: "investmentAmount", type: "uint256" },
+      { internalType: "uint256", name: "investmentDate", type: "uint256" },
+      { internalType: "uint256", name: "valuationCap", type: "uint256" },
+      { internalType: "uint256", name: "discount", type: "uint256" },
+      { internalType: "bool", name: "proRataRights", type: "bool" },
+      { internalType: "bool", name: "mostFavoredNation", type: "bool" },
+      { internalType: "address", name: "investorAddress", type: "address" },
+      { internalType: "string", name: "name", type: "string" },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "", type: "address" }],
+    name: "userProposalCount",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "user", type: "address" }],
+    name: "whitelistAddress",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "", type: "address" }],
+    name: "whitelistedAddresses",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+];
