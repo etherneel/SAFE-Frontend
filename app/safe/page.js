@@ -92,7 +92,6 @@ export default function Safe() {
     actions.setSubmitting(false);
   }
 
-  console.log(safeformdata);
 
   useEffect(() => {
     setSafefinaldata({
